@@ -12,11 +12,11 @@ class Page
     users << user
   end
 
-  def unique_views
+  def unique_visits
     users.uniq.count
   end
 
-  def views
+  def visits
     users.count
   end
 

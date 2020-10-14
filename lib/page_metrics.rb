@@ -1,4 +1,4 @@
-require 'page'
+require_relative 'page'
 
 # PageMetrics provides a method of returning a Hash of Pages which can be used to display the metrics
 class PageMetrics

@@ -11,7 +11,7 @@ RSpec.describe PageMetrics do
     metrics = PageMetrics.new(logs).call
 
     expect(metrics.first).to be_a(Page)
-    expect(metrics.first.views).to eq(1)
-    expect(metrics.first.unique_views).to eq(1)
+    expect(metrics.first.visits).to eq(1)
+    expect(metrics.first.unique_visits).to eq(1)
   end
 end
