@@ -1,6 +1,6 @@
-require 'page_metrics_processors/most_views'
 require 'page'
 
+# PageMetrics provides a method of returning a Hash of Pages which can be used to display the metrics
 class PageMetrics
 
   def initialize(log)
@@ -16,7 +16,7 @@ class PageMetrics
 
       page.add_user(log_user)
       pages[log_path] = page
-    end
+    end.values
   end
 
   private
