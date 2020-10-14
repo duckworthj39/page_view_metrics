@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class PageLogsLoader
   def initialize(file_path:)
     @file_path = file_path

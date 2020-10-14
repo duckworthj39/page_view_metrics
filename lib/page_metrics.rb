@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'page'
 
 # PageMetrics provides a method of returning a Hash of Pages which can be used to display the metrics
@@ -9,7 +11,7 @@ class PageMetrics
 
   def call
     log.each_with_object({}) do |logged_page, pages|
-      log_path, log_user = logged_page.split(" ")
+      log_path, log_user = logged_page.split(' ')
       next pages[log_path].add_user(log_user) unless pages[log_path].nil?
 
       page = Page.new(log_path)

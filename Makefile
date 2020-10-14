@@ -4,3 +4,6 @@ build:
 
 run-parser:
 	./bin/parser.rb
+
+run-parser-table:
+	./bin/parser.rb "webserver.log" "colourised_table"

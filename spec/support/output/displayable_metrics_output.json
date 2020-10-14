@@ -1,1 +1,3 @@
-{"displayable_metrics_output": "Visits \n---------- \ntest/log/path/2 3 visits\ntest/log/path/3 2 visits\ntest/log/path 1 visits\n\n\nUnique Visits \n---------- \ntest/log/path/2 1 unique visits\ntest/log/path/3 1 unique visits\ntest/log/path 1 unique visits\n"}
+{
+  "displayable_metrics_output": "Visits \n---------- \ntest/log/path/2 3 visits\ntest/log/path/3 2 visits\ntest/log/path 1 visit\n"
+}

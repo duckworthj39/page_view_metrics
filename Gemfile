@@ -3,6 +3,8 @@
 source 'https://rubygems.org'
 ruby '2.7.2'
 
+gem 'colorize'
+
 group :development, :test do
   gem 'guard-rspec'
   gem 'pry'

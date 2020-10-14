@@ -2,7 +2,6 @@
 
 class Page
 
-  attr_reader :address, :users
   def initialize(address)
     @address = address
     @users = []
@@ -19,5 +18,21 @@ class Page
   def visits
     users.count
   end
+
+  def visits_to_s
+    "#{address} #{visits} visit#{visits > 1 ? "s" : ""}"
+  end
+
+  def unique_visits_to_s
+    "#{address} #{unique_visits} unique visit#{unique_visits > 1 ? "s" : ""}"
+  end
+
+  def to_table_row
+    "#{address} #{visits} visit#{visits > 1 ? "s" : ""} and #{unique_visits} unique visit#{unique_visits > 1 ? "s" : ""}"
+  end
+
+  private
+
+  attr_reader :address, :users
 
 end
