@@ -21,11 +21,11 @@ class Metric
   end
 
   def visits_to_s
-    "#{address} #{visits} visit#{visits > 1 ? 's' : ''}"
+    "#{visits} visit#{visits > 1 ? 's' : ''}"
   end
 
   def unique_visits_to_s
-    "#{address} #{unique_visits} unique visit#{unique_visits > 1 ? 's' : ''}"
+    "#{unique_visits} unique visit#{unique_visits > 1 ? 's' : ''}"
   end
 
   def table_row_to_s

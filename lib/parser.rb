@@ -3,8 +3,9 @@
 require_relative 'page_metrics'
 require_relative '../lib/presenters/base_presenter'
 require_relative '../lib/presenters/basic_presenter'
+require_relative '../lib/presenters/colourized_table_presenter'
 
-PERMITTED_FORMATS = %w[basic].freeze
+PERMITTED_FORMATS = %w[basic colourized_table].freeze
 PERMITTED_FILTERS = %w[visits unique_visits].freeze
 class Parser
   def initialize(page_metrics: PageMetrics, output: $stdout)
