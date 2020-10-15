@@ -10,29 +10,40 @@ RSpec.describe 'Page View metrics' do
     it 'parses the log file' do
       loader = spy(new: double(load_file: 'test_text'))
       page_metrics = spy
-      metrics_presenter = spy
+      output = spy
 
-      parser = Parser.new(loader: loader, page_metrics: page_metrics, metrics_presenter: metrics_presenter)
+      parser = Parser.new(loader: loader, page_metrics: page_metrics, output: output)
 
       parser.parse_file
 
       expect(loader).to have_received(:new)
       expect(page_metrics).to have_received(:new)
-      # expect(metrics_presenter).to have_received(:new)
+      expect(output).to have_received(:puts)
     end
   end
 
   context 'integration specs' do
     it 'parses a log file and returns a basic output' do
-      parser_output = Parser.new.parse_file(file_path: integration_test_log_path)
-
+      output = spy
+      Parser.new(output: output).parse_file(file_path: integration_test_log_path)
       expected_output_json = File.open('spec/support/output/displayable_metrics_output.json').read
+      expected_output = JSON.parse(expected_output_json)['metrics_output']
 
-      expected_output = JSON.parse(expected_output_json)["displayable_metrics_output"]
-
-      expect(parser_output).to eq(expected_output)
+      expect(output).to have_received(:puts) do |arg|
+        expect(arg).to eq(expected_output)
+      end
     end
 
+    it 'parses a log file and returns a only visits as basic output' do
+      output = spy
+      Parser.new(output: output).parse_file(file_path: integration_test_log_path, filters: ['visits'])
+      expected_output_json = File.open('spec/support/output/displayable_metrics_output.json').read
+      expected_output = JSON.parse(expected_output_json)['visits_basic_output']
+
+      expect(output).to have_received(:puts) do |arg|
+        expect(arg).to eq(expected_output)
+      end
+    end
   end
 
 

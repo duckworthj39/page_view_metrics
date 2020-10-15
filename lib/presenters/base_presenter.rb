@@ -1,10 +1,10 @@
 class BasePresenter
 
   # Filters are used so we only have to display a specific metric
-  DEFAULT_FILTERS = %i[visits unique_visits].freeze
-  def initialize(metrics, filters: DEFAULT_FILTERS)
+  DEFAULT_FILTERS = %w[visits unique_visits].freeze
+  def initialize(metrics, filters: nil)
     @metrics = metrics
-    @filters = filters
+    @filters = filters || DEFAULT_FILTERS
   end
 
   def call

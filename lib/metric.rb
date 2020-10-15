@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Page
+class Metric
 
   def initialize(address)
     @address = address

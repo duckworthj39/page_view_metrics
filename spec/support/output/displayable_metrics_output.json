@@ -1,3 +1,4 @@
 {
-  "displayable_metrics_output": "Visits \n---------- \ntest/log/path/2 3 visits\ntest/log/path/3 2 visits\ntest/log/path 1 visit\n"
+  "metrics_output": "\nVisits \n---------- \ntest/log/path/2 3 visits\ntest/log/path/3 2 visits\ntest/log/path 1 visit\n\nUnique Visits \n---------- \ntest/log/path/3 1 unique visit\ntest/log/path/2 1 unique visit\ntest/log/path 1 unique visit\n",
+  "visits_basic_output": "\nVisits \n---------- \ntest/log/path/2 3 visits\ntest/log/path/3 2 visits\ntest/log/path 1 visit\n"
 }

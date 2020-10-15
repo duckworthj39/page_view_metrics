@@ -10,7 +10,7 @@ RSpec.describe PageMetrics do
     logs = ['test/logs/path 000.000.000.000']
     metrics = PageMetrics.new(logs).call
 
-    expect(metrics.first).to be_a(Page)
+    expect(metrics.first).to be_a(Metric)
     expect(metrics.first.visits).to eq(1)
     expect(metrics.first.unique_visits).to eq(1)
   end

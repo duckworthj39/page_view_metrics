@@ -18,7 +18,7 @@ class BasicPresenter < BasePresenter
   private
 
   def append_metrics(filter)
-    sorted_metrics = metrics.sort_by(&filter).reverse
+    sorted_metrics = metrics.sort_by(&filter.to_sym).reverse
     sorted_metrics.map do |metric|
       metric.public_send("#{filter}_to_s") + "\n"
     end.join('')
