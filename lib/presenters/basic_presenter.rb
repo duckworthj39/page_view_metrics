@@ -1,5 +1,3 @@
-require 'spec_helper'
-require 'presenters/base_presenter'
 
 class BasicPresenter < BasePresenter
 

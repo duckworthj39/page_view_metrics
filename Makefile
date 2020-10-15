@@ -3,7 +3,7 @@ build:
 	chmod +x bin/parser.rb
 
 run-parser:
-	./bin/parser.rb
+	./bin/run.rb
 
 run-parser-table:
-	./bin/parser.rb "webserver.log" "colourised_table"
+	./bin/run.rb "webserver.log" "colourised_table"
