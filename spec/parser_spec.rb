@@ -3,7 +3,6 @@
 require 'parser'
 
 RSpec.describe 'Page View metrics' do
-
   let(:integration_test_log_path) { 'spec/support/integration_test_data.log' }
 
   context '#parse_file' do

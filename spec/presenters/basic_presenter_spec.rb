@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require_relative '../../lib/presenters/basic_presenter'
 
-
 RSpec.describe BasicPresenter do
-
   context 'without filter' do
     it 'returns a presentable string' do
       metrics_double = double(
@@ -38,7 +38,6 @@ RSpec.describe BasicPresenter do
       )
       basic_presenter = described_class.new([metrics_double], filters: [:visits]).call
 
-
       expect(basic_presenter).to eq(
         "\nVisits \n---------- \ntest/path 1 visit\n"
       )
@@ -63,7 +62,6 @@ RSpec.describe BasicPresenter do
         visits: 2, visits_to_s: 'test/path/2 2 visit'
       )
       basic_presenter = described_class.new([metrics_double, metrics_double2], filters: [:visits]).call
-
 
       expect(basic_presenter).to eq(
         "\nVisits \n---------- \ntest/path/2 2 visit\ntest/path 1 visit\n"

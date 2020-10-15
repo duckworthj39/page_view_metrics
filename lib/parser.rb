@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 require_relative 'page_logs_loader'
 require_relative 'page_metrics'
@@ -7,7 +8,6 @@ require_relative '../lib/presenters/basic_presenter'
 PERMITTED_FORMATS = %w[basic].freeze
 PERMITTED_FILTERS = %w[visits unique_visits].freeze
 class Parser
-
   def initialize(loader: PageLogsLoader, page_metrics: PageMetrics, output: $stdout)
     @loader = loader
     @page_metrics = page_metrics
@@ -40,7 +40,7 @@ class Parser
     return if filters.nil?
 
     filter_array = filters.split(' ')
-    raise 'Invalid Filter' unless filter_array.all? { |filter| PERMITTED_FILTERS.include?(filter)}
+    raise 'Invalid Filter' unless filter_array.all? { |filter| PERMITTED_FILTERS.include?(filter) }
 
     filter_array
   end

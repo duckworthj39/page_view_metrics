@@ -3,7 +3,6 @@
 require 'colorize'
 
 class MetricsPresenter
-
   def initialize(pages)
     @pages = pages
   end
@@ -20,13 +19,13 @@ class MetricsPresenter
   end
 
   def colourised_table
-    output = "\n#{"Visits".colorize(:light_yellow)} and #{"Unique Visits".colorize(:light_red)} \n"
+    output = "\n#{'Visits'.colorize(:light_yellow)} and #{'Unique Visits'.colorize(:light_red)} \n"
     output += "------------------------------------ \n"
     sorted_pages = pages.sort_by(&:to_table_row).reverse
 
     colour = :light_blue
     sorted_pages.each do |page|
-      output += page.public_send("#{:to_table_row}").colorize(colour) + "\n"
+      output += page.public_send('to_table_row').colorize(colour) + "\n"
       colour = alternate_colour(colour)
     end
     output

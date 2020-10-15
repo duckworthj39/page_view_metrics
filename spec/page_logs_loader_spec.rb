@@ -11,6 +11,3 @@ RSpec.describe PageLogsLoader do
     expect(logs.first).to eq('test/log/path 000.000.000.000')
   end
 end
-
-
-

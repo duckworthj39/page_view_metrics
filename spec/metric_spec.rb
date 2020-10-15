@@ -3,8 +3,7 @@
 require 'metric'
 
 RSpec.describe Metric do
-
-  subject { Metric.new('test/path/1')}
+  subject { Metric.new('test/path/1') }
 
   context 'with a single user' do
     it 'returns unique views' do
@@ -38,7 +37,6 @@ RSpec.describe Metric do
       output = subject.visits_to_s
 
       expect(output).to eq('test/path/1 1 visit')
-
     end
 
     it 'displays a formatted string for a pages visits value with visits pluralised' do
@@ -48,7 +46,6 @@ RSpec.describe Metric do
       output = subject.visits_to_s
 
       expect(output).to eq('test/path/1 2 visits')
-
     end
   end
 
@@ -59,7 +56,6 @@ RSpec.describe Metric do
       output = subject.unique_visits_to_s
 
       expect(output).to eq('test/path/1 1 unique visit')
-
     end
 
     it 'displays a formatted string for a pages unique visits value with visits pluralised' do
@@ -69,7 +65,6 @@ RSpec.describe Metric do
       output = subject.unique_visits_to_s
 
       expect(output).to eq('test/path/1 2 unique visits')
-
     end
   end
 
@@ -80,7 +75,7 @@ RSpec.describe Metric do
 
       output = subject.table_row_to_s
 
-      expect(output).to eq("test/path/1 2 visits and 2 unique visits")
+      expect(output).to eq('test/path/1 2 visits and 2 unique visits')
     end
   end
 end

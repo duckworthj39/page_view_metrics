@@ -4,7 +4,6 @@ require_relative 'metric'
 
 # PageMetrics provides a method of returning a Hash of Pages which can be used to display the metrics
 class PageMetrics
-
   class WrongFormatError < StandardError; end
 
   def initialize(log)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class BasePresenter
   # Filters are used so we only have to display a specific metric
@@ -9,7 +10,6 @@ class BasePresenter
 
   def call
     raise NotImplementedError
-
   end
 
   private

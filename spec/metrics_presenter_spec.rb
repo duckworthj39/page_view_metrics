@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'metrics_presenter'
 
 RSpec.describe MetricsPresenter do
-
   context 'present visits' do
     it 'returns a simple presentable string with the most views' do
       page_double = double(visits: 1, unique_visits: 1, visits_to_s: 'test/path 1 visits')
@@ -60,16 +61,13 @@ RSpec.describe MetricsPresenter do
       page_double2 = double(to_table_row: 'test/path/2 1 visits')
       page_double3 = double(to_table_row: 'test/path/3 1 visits')
 
-
       presenter_output = MetricsPresenter
-        .new([page_double, page_double2, page_double3]).colourised_table
+                         .new([page_double, page_double2, page_double3]).colourised_table
 
       expect(presenter_output).to eq(
         "\n\e[0;93;49mVisits\e[0m and \e[0;91;49mUnique Visits\e[0m \n------------------------------------ \n\e[0;94;49mtest/path/3 1 visits\e[0m\n\e[0;92;49mtest/path/2 1 visits\e[0m\n\e[0;94;49mtest/path 1 visits\e[0m\n"
       )
     end
-
-
   end
 
   it 'raises a NotImplemented error if the metric_type is not in the permitted list' do

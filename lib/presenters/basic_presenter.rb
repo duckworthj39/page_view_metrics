@@ -1,6 +1,6 @@
+# frozen_string_literal: true
 
 class BasicPresenter < BasePresenter
-
   def call
     output = ''
     filters.each do |filter|
@@ -21,5 +21,4 @@ class BasicPresenter < BasePresenter
       metric.public_send("#{filter}_to_s") + "\n"
     end.join('')
   end
-
 end

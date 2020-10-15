@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'page_metrics'
 
-
 RSpec.describe PageMetrics do
-
   # Takes an array of logs and outputs an array of Page objects
 
   it 'returns an array of page objects' do
@@ -19,6 +19,6 @@ RSpec.describe PageMetrics do
     logs = File.open('spec/support/incorrect_data.log').read
     prepared_logs = logs.split("\n")
 
-    expect{ PageMetrics.new(prepared_logs).call }.to raise_error(PageMetrics::WrongFormatError)
+    expect { PageMetrics.new(prepared_logs).call }.to raise_error(PageMetrics::WrongFormatError)
   end
 end

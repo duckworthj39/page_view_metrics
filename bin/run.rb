@@ -4,6 +4,3 @@
 require_relative '../lib/parser'
 
 Parser.new.parse_file(*ARGV)
-
-
-
