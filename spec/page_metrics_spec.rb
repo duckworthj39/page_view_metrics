@@ -7,8 +7,8 @@ RSpec.describe PageMetrics do
   # Takes an array of logs and outputs an array of Page objects
 
   it 'returns an array of page objects' do
-    logs = ['test/logs/path 000.000.000.000']
-    metrics = PageMetrics.new(logs).call
+    file_path = 'spec/support/integration_test_data.log'
+    metrics = PageMetrics.new(file_path).call
 
     expect(metrics.first).to be_a(Metric)
     expect(metrics.first.visits).to eq(1)
@@ -16,9 +16,8 @@ RSpec.describe PageMetrics do
   end
 
   it 'returns an array of page objects' do
-    logs = File.open('spec/support/incorrect_data.log').read
-    prepared_logs = logs.split("\n")
+    file_path = 'spec/support/incorrect_data.log'
 
-    expect { PageMetrics.new(prepared_logs).call }.to raise_error(PageMetrics::WrongFormatError)
+    expect { PageMetrics.new(file_path).call }.to raise_error(PageMetrics::WrongFormatError)
   end
 end

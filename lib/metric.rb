@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Metric
+  attr_reader :address, :users
+
   def initialize(address)
     @address = address
     @users = []
@@ -29,8 +31,4 @@ class Metric
   def table_row_to_s
     "#{address} #{visits} visit#{visits > 1 ? 's' : ''} and #{unique_visits} unique visit#{unique_visits > 1 ? 's' : ''}"
   end
-
-  private
-
-  attr_reader :address, :users
 end

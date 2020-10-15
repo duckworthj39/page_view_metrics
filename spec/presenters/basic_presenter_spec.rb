@@ -11,9 +11,16 @@ RSpec.describe BasicPresenter do
       )
       basic_presenter = described_class.new([metrics_double]).call
 
-      expect(basic_presenter).to eq(
-        "\nVisits \n---------- \ntest/path 1 visit\n\nUnique Visits \n---------- \ntest/path 1 unique visit\n"
-      )
+      expected_output = <<~OUTPUT
+        \nVisits 
+        ---------- 
+        test/path 1 visit
+
+        Unique Visits 
+        ---------- 
+        test/path 1 unique visit
+      OUTPUT
+      expect(basic_presenter).to eq(expected_output)
     end
 
     it 'returns a presentable string with multiple paths' do
@@ -25,9 +32,19 @@ RSpec.describe BasicPresenter do
       )
       basic_presenter = described_class.new([metrics_double, metrics_double2]).call
 
-      expect(basic_presenter).to eq(
-        "\nVisits \n---------- \ntest/path/2 2 visit\ntest/path 1 visit\n\nUnique Visits \n---------- \ntest/path/2 3 unique visit\ntest/path 1 unique visit\n"
-      )
+      expected_output = <<~OUTPUT
+        \nVisits 
+        ---------- 
+        test/path/2 2 visit
+        test/path 1 visit
+
+        Unique Visits 
+        ---------- 
+        test/path/2 3 unique visit
+        test/path 1 unique visit
+      OUTPUT
+
+      expect(basic_presenter).to eq(expected_output)
     end
   end
 
@@ -38,9 +55,13 @@ RSpec.describe BasicPresenter do
       )
       basic_presenter = described_class.new([metrics_double], filters: [:visits]).call
 
-      expect(basic_presenter).to eq(
-        "\nVisits \n---------- \ntest/path 1 visit\n"
-      )
+      expected_output = <<~OUTPUT
+
+        Visits 
+        ---------- 
+        test/path 1 visit
+      OUTPUT
+      expect(basic_presenter).to eq(expected_output)
     end
 
     it 'returns a presentable string for unique visits metric' do
@@ -49,23 +70,28 @@ RSpec.describe BasicPresenter do
       )
       basic_presenter = described_class.new([metrics_double], filters: [:unique_visits]).call
 
-      expect(basic_presenter).to eq(
-        "\nUnique Visits \n---------- \ntest/path 1 unique visit\n"
-      )
+      expected_output = <<~OUTPUT
+        \nUnique Visits 
+        ---------- 
+        test/path 1 unique visit
+      OUTPUT
+
+      expect(basic_presenter).to eq(expected_output)
     end
 
     it 'returns a presentable string for visits metric with multiple paths' do
-      metrics_double = double(
-        visits: 1, visits_to_s: 'test/path 1 visit'
-      )
-      metrics_double2 = double(
-        visits: 2, visits_to_s: 'test/path/2 2 visit'
-      )
+      metrics_double = double(visits: 1, visits_to_s: 'test/path 1 visit')
+      metrics_double2 = double(visits: 2, visits_to_s: 'test/path/2 2 visit')
       basic_presenter = described_class.new([metrics_double, metrics_double2], filters: [:visits]).call
 
-      expect(basic_presenter).to eq(
-        "\nVisits \n---------- \ntest/path/2 2 visit\ntest/path 1 visit\n"
-      )
+      expected_output = <<~OUTPUT
+        \nVisits 
+        ---------- 
+        test/path/2 2 visit
+        test/path 1 visit
+      OUTPUT
+
+      expect(basic_presenter).to eq(expected_output)
     end
 
     it 'returns a presentable string for multiple unique visits metrics' do
@@ -77,9 +103,14 @@ RSpec.describe BasicPresenter do
       )
       basic_presenter = described_class.new([metrics_double, metrics_double2], filters: [:unique_visits]).call
 
-      expect(basic_presenter).to eq(
-        "\nUnique Visits \n---------- \ntest/path/2 3 unique visit\ntest/path 1 unique visit\n"
-      )
+      expected_output = <<~OUTPUT
+        \nUnique Visits 
+        ---------- 
+        test/path/2 3 unique visit
+        test/path 1 unique visit
+      OUTPUT
+
+      expect(basic_presenter).to eq(expected_output )
     end
   end
 end

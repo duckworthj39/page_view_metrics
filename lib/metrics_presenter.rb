@@ -4,7 +4,7 @@ require 'colorize'
 
 class MetricsPresenter
   def initialize(pages)
-    @pages = pages
+    @metrics = pages
   end
 
   PERMITTED_METRIC_TYPE = %i[visits unique_visits].freeze
@@ -21,7 +21,7 @@ class MetricsPresenter
   def colourised_table
     output = "\n#{'Visits'.colorize(:light_yellow)} and #{'Unique Visits'.colorize(:light_red)} \n"
     output += "------------------------------------ \n"
-    sorted_pages = pages.sort_by(&:to_table_row).reverse
+    sorted_pages = metrics.sort_by(&:to_table_row).reverse
 
     colour = :light_blue
     sorted_pages.each do |page|
@@ -33,10 +33,10 @@ class MetricsPresenter
 
   private
 
-  attr_reader :pages
+  attr_reader :metrics
 
   def append_metrics(output, metric_type)
-    sorted_pages = pages.sort_by(&metric_type).reverse
+    sorted_pages = metrics.sort_by(&metric_type).reverse
     sorted_pages.each do |page|
       output += page.public_send("#{metric_type}_to_s") + "\n"
     end

@@ -7,15 +7,13 @@ RSpec.describe 'Page View metrics' do
 
   context '#parse_file' do
     it 'parses the log file' do
-      loader = spy(new: double(load_file: 'test_text'))
       page_metrics = spy
       output = spy
 
-      parser = Parser.new(loader: loader, page_metrics: page_metrics, output: output)
+      parser = Parser.new(page_metrics: page_metrics, output: output)
 
       parser.parse_file
 
-      expect(loader).to have_received(:new)
       expect(page_metrics).to have_received(:new)
       expect(output).to have_received(:puts)
     end

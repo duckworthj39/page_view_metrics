@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'page_logs_loader'
 require_relative 'page_metrics'
 require_relative '../lib/presenters/base_presenter'
 require_relative '../lib/presenters/basic_presenter'
@@ -8,17 +7,16 @@ require_relative '../lib/presenters/basic_presenter'
 PERMITTED_FORMATS = %w[basic].freeze
 PERMITTED_FILTERS = %w[visits unique_visits].freeze
 class Parser
-  def initialize(loader: PageLogsLoader, page_metrics: PageMetrics, output: $stdout)
+  def initialize(page_metrics: PageMetrics, output: $stdout)
     @loader = loader
     @page_metrics = page_metrics
     @output = output
   end
 
-  # Filters can be passed as a string like so "visits unique_visits"
+  # Filters can be passed as a string  "visits unique_visits"
   # and will be converted to an array to be used for filtering
   def parse_file(file_path = 'webserver.log', format = 'basic', filters = nil)
-    metrics_text = loader.new(file_path: file_path).load_file
-    metrics = page_metrics.new(metrics_text).call
+    metrics = page_metrics.new(file_path).call
 
     presenter = presenter_class(validate_format(format))
     output.puts presenter.new(metrics, filters: validate_filters(filters)).call

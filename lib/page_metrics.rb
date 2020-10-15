@@ -6,28 +6,33 @@ require_relative 'metric'
 class PageMetrics
   class WrongFormatError < StandardError; end
 
-  def initialize(log)
-    @log = log
+  def initialize(file_path)
+    @file_path = file_path
   end
 
   def call
-    log.each_with_object({}) do |logged_page, pages|
-      log_path, log_user = logged_page.split(' ')
-      validate_logs(log_path, log_user)
+    metrics = {}
+    File.open(file_path, 'r') do |f|
+      f.each_line do |line|
+        log_path, log_user = line.split(' ')
+        validate_logs(log_path, log_user)
 
-      next pages[log_path].add_user(log_user) unless pages[log_path].nil?
+        next metrics[log_path].add_user(log_user) unless metrics[log_path].nil?
 
-      page = Metric.new(log_path)
-      page.add_user(log_user)
-      pages[log_path] = page
-    end.values
+        metric = Metric.new(log_path)
+        metric.add_user(log_user)
+        metrics[log_path] = metric
+      end
+
+      metrics.values
+    end
   end
 
   private
 
-  attr_reader :log
+  attr_reader :file_path
 
   def validate_logs(log_path, log_user)
-    raise WrongFormatError, 'log file cannot be parsed' if log_path.nil? || log_user.nil?
+    raise WrongFormatError, 'file_path file cannot be parsed' if log_path.nil? || log_user.nil?
   end
 end

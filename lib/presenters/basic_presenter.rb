@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../../lib/presenters/base_presenter'
+
 class BasicPresenter < BasePresenter
   def call
     output = ''
