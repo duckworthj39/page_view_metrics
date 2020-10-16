@@ -11,7 +11,7 @@ class ColourizedTablePresenter < BasePresenter
     sorted_metrics = metrics.sort_by(&:visits).reverse
     output = ''
     sorted_metrics.each do |metric|
-      output += "#{metric.address}"
+      output += metric.address
       output += append_columns(metric)
       output += "\n"
     end
@@ -22,7 +22,7 @@ class ColourizedTablePresenter < BasePresenter
 
   def append_columns(metric)
     colour = :light_green
-    filters.map do |filter, string|
+    filters.map do |filter|
       colour = alternate_colour(colour)
       "     #{metric.public_send("#{filter.to_sym}_to_s").colorize(colour)}"
     end.join('')
@@ -33,5 +33,4 @@ class ColourizedTablePresenter < BasePresenter
 
     :light_blue
   end
-
 end

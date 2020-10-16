@@ -54,12 +54,11 @@ RSpec.describe Parser do
     end
 
     context 'colourized table' do
-      fit 'parses a log file and returns visits and unique visits' do
+      it 'parses a log file and returns visits and unique visits' do
         output = spy
         described_class.new(output: output).parse_file(integration_test_log_path, 'colourized_table')
         expected_output_json = File.open('spec/support/output/parser_output.json').read
         expected_output = JSON.parse(expected_output_json)['colourized_table'].undump
-        
         expect(output).to have_received(:puts) do |arg|
           expect(arg).to eq(expected_output)
         end
