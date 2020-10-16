@@ -1,6 +1,6 @@
 build:
 	bundle install
-	chmod +x bin/parser.rb
+	chmod +x bin/run.rb
 
 run-parser:
 	./bin/run.rb

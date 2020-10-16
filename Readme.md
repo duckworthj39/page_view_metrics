@@ -36,7 +36,7 @@ This initial iteration includes two sections, one to create a data set for the p
 The string manipulation to display this data set is all done within the MetricsPresenter, this will take any attribute a
 page has and append the value to a presentable string. 
 
-# Presenter outcome
+# Final outcome
 It became clear that in order to provide the functionality I initially wanted, which was to make the presentation
 extendable a needed to remove use inheritence. This was adding a new way of presenting the results just required
 adding a child class to the **BasePresenter**, allowing the parser to take a new format and it should be good to go
@@ -44,12 +44,20 @@ adding a child class to the **BasePresenter**, allowing the parser to take a new
 
 # Tests
 The tests can be run by running `make test-documentation`
+```...........................
+   
+   Finished in 0.01144 seconds (files took 0.31095 seconds to load)
+   27 examples, 0 failures
+   
+   Coverage report generated for RSpec to /Users/jasonduckworth/Gitlab/page_view_metrics/coverage. 114 / 114 LOC (100.0%) covered.
+```
 
 # Rubocop output
-`Inspecting 14 files
+```Inspecting 14 files
  ..............
  
- 14 files inspected, no offenses detected`
+ 14 files inspected, no offenses detected
+```
 
 # References
 https://launchschool.com/blog/how-the-hash-works-in-ruby

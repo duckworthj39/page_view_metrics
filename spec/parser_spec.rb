@@ -17,6 +17,29 @@ RSpec.describe Parser do
       expect(metrics_log_parser).to have_received(:new)
       expect(output).to have_received(:puts)
     end
+
+    it 'raises error if presenter not valid' do
+      metrics_log_parser = spy
+      output = spy
+
+      parser = described_class.new(metrics_log_parser: metrics_log_parser, output: output)
+
+      expect do
+        parser.parse_file(integration_test_log_path, 'invalid_format')
+      end.to raise_error('invalid_format presenter not found')
+    end
+
+    it 'raises error if we fail to get the presenter constant' do
+      metrics_log_parser = spy
+      output = spy
+
+      stub_const('Parser::PERMITTED_FORMATS', ['invalid_format'])
+      parser = described_class.new(metrics_log_parser: metrics_log_parser, output: output)
+
+      expect do
+        parser.parse_file(integration_test_log_path, 'invalid_format')
+      end.to raise_error('invalid_format presenter not found')
+    end
   end
 
   context 'basic presentation' do
@@ -52,30 +75,30 @@ RSpec.describe Parser do
         expect(arg).to eq(expected_output)
       end
     end
+  end
 
-    context 'colourized table' do
-      it 'parses a log file and returns visits and unique visits' do
-        output = spy
-        described_class.new(output: output).parse_file(integration_test_log_path, 'colourized_table')
-        expected_output_json = File.open('spec/support/output/parser_output.json').read
-        expected_output = JSON.parse(expected_output_json)['colourized_table'].undump
-        expect(output).to have_received(:puts) do |arg|
-          expect(arg).to eq(expected_output)
-        end
+  context 'colourized table' do
+    it 'parses a log file and returns visits and unique visits' do
+      output = spy
+      described_class.new(output: output).parse_file(integration_test_log_path, 'colourized_table')
+      expected_output_json = File.open('spec/support/output/parser_output.json').read
+      expected_output = JSON.parse(expected_output_json)['colourized_table'].undump
+      expect(output).to have_received(:puts) do |arg|
+        expect(arg).to eq(expected_output)
       end
     end
+  end
 
-    context 'challange fixture' do
-      let(:webserver_log) { 'spec/support/webserver.log' }
-      it 'parses a log file and returns visits and unique visits' do
-        output = spy
+  context 'challange fixture' do
+    let(:webserver_log) { 'spec/support/webserver.log' }
+    it 'parses a log file and returns visits and unique visits' do
+      output = spy
 
-        described_class.new(output: output).parse_file(webserver_log)
-        expected_output_json = File.open('spec/support/output/parser_output.json').read
-        expected_output = JSON.parse(expected_output_json)['challenge_fixture']
-        expect(output).to have_received(:puts) do |arg|
-          expect(arg).to eq(expected_output)
-        end
+      described_class.new(output: output).parse_file(webserver_log)
+      expected_output_json = File.open('spec/support/output/parser_output.json').read
+      expected_output = JSON.parse(expected_output_json)['challenge_fixture']
+      expect(output).to have_received(:puts) do |arg|
+        expect(arg).to eq(expected_output)
       end
     end
   end

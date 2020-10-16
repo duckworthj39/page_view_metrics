@@ -6,7 +6,7 @@ require 'metrics_log_parser'
 RSpec.describe MetricsLogParser do
   # Takes an array of logs and outputs an array of Page objects
 
-  it 'returns an array of page objects' do
+  it 'returns an array of metric objects' do
     file_path = 'spec/support/integration_test_data.log'
     metrics = described_class.new(file_path).call
 
@@ -15,13 +15,13 @@ RSpec.describe MetricsLogParser do
     expect(metrics.first.unique_visits).to eq(1)
   end
 
-  it 'raises an error if file is the wrong format' do
+  it 'raises an error if the file is the wrong format' do
     file_path = 'spec/support/incorrect_data.log'
 
     expect { described_class.new(file_path).call }.to raise_error(MetricsLogParser::WrongFormatError)
   end
 
-  it 'raises as error if the file does not exist' do
+  it 'raises an error if the file does not exist' do
     file_path = 'does_not_exists'
 
     expect { described_class.new(file_path).call }.to raise_error('Log file not found')
