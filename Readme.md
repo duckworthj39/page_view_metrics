@@ -4,8 +4,9 @@ An app that displays metrics for a page based off a specific log structure
 
 # Prerequisites
 * Install bundler 2.0 or higher
+* Install Make - if you can't please run the commands provided in the Makefile
 * Install ruby 2.7.2
-* Run `make build` - this will make the parser.rb executable and run bundle install
+* Run `make build` - this will make the run.rb executable and run bundle install
 * Run `make run-parser` - This will run the parser with the default log file location
 * If you would like to run it manually with another file path you can also use the command `./bin/parser.rb "[file path here]"`
 
@@ -24,10 +25,10 @@ and it means when it comes to displaying the data all of it will be within one a
 # Mid Development
 As the processing of this data is so trivial it looks like the Metric class can handle processing the metrics itself. 
 That means I can provide a mechanism for supplying both the to total views and unique views very simply. Also instead of 
-using an array of objects I have found it much more readable for the PageMetrics class to build a hash of objects.
+using an array of objects I have found it much more readable for the MetricLogParser class to build a hash of objects.
 
 Something I hadn't taken into account was the performance of using an array instead of a hash. Finding a value in an array
-means iterating from the first element until the value is found. To improve this the **PageMetric** class now uses a hash
+means iterating from the first element until the value is found. To improve this the **MetricLogParser** class now uses a hash
 to store the Metric object so they can be looked up in a more performant way.
 
 # First Iteration
@@ -41,9 +42,17 @@ extendable a needed to remove use inheritence. This was adding a new way of pres
 adding a child class to the **BasePresenter**, allowing the parser to take a new format and it should be good to go
 (of course all this while driving it through tests).
 
+# Tests
+The tests can be run by running `make test-documentation`
 
+# Rubocop output
+`Inspecting 14 files
+ ..............
+ 
+ 14 files inspected, no offenses detected`
 
 # References
 https://launchschool.com/blog/how-the-hash-works-in-ruby
+
 https://github.com/simplecov-ruby/simplecov
 

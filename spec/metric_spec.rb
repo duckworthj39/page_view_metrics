@@ -15,7 +15,7 @@ RSpec.describe Metric do
   end
 
   context 'with multiple users' do
-    it 'increments the page views' do
+    it 'increments visits' do
       subject.add_user('000.000.000.000')
       subject.add_user('000.000.000.001')
       expect(subject.visits).to eq(2)
@@ -31,7 +31,7 @@ RSpec.describe Metric do
   end
 
   context 'visits attribute' do
-    it 'displays a formatted string for a pages visits value' do
+    it 'displays a formatted string for a metrics visits value' do
       subject.add_user('000.000.000.000')
 
       output = subject.visits_to_s
@@ -39,7 +39,7 @@ RSpec.describe Metric do
       expect(output).to eq('1 visit')
     end
 
-    it 'displays a formatted string for a pages visits value with visits pluralised' do
+    it 'pluralises visit when above 1' do
       subject.add_user('000.000.000.000')
       subject.add_user('000.000.000.000')
 
@@ -58,7 +58,7 @@ RSpec.describe Metric do
       expect(output).to eq('1 unique visit')
     end
 
-    it 'displays a formatted string for a pages unique visits value with visits pluralised' do
+    it 'pluralises unique visit when above 1' do
       subject.add_user('000.000.000.000')
       subject.add_user('000.000.000.001')
 

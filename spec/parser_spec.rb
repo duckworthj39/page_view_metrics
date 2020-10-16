@@ -7,14 +7,14 @@ RSpec.describe Parser do
 
   context '#parse_file' do
     it 'parses the log file' do
-      page_metrics = spy
+      metrics_log_parser = spy
       output = spy
 
-      parser = described_class.new(page_metrics: page_metrics, output: output)
+      parser = described_class.new(metrics_log_parser: metrics_log_parser, output: output)
 
       parser.parse_file
 
-      expect(page_metrics).to have_received(:new)
+      expect(metrics_log_parser).to have_received(:new)
       expect(output).to have_received(:puts)
     end
   end
@@ -63,6 +63,21 @@ RSpec.describe Parser do
           expect(arg).to eq(expected_output)
         end
       end
+    end
+
+    context 'challange fixture' do
+      let(:webserver_log) { 'spec/support/webserver.log' }
+      it 'parses a log file and returns visits and unique visits' do
+        output = spy
+
+        described_class.new(output: output).parse_file(webserver_log)
+        expected_output_json = File.open('spec/support/output/parser_output.json').read
+        expected_output = JSON.parse(expected_output_json)['challenge_fixture']
+        expect(output).to have_received(:puts) do |arg|
+          expect(arg).to eq(expected_output)
+        end
+      end
+
     end
   end
 end

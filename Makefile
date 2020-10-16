@@ -10,3 +10,6 @@ run-parser-visits-filter:
 
 run-parser-table:
 	./bin/run.rb "webserver.log" "colourized_table"
+
+test-documentation:
+	rspec spec --format documentation

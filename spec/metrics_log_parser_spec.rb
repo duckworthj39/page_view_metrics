@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'page_metrics'
+require 'metrics_log_parser'
 
-RSpec.describe PageMetrics do
+RSpec.describe MetricsLogParser do
   # Takes an array of logs and outputs an array of Page objects
 
   it 'returns an array of page objects' do
@@ -15,9 +15,15 @@ RSpec.describe PageMetrics do
     expect(metrics.first.unique_visits).to eq(1)
   end
 
-  it 'returns an array of page objects' do
+  it 'raises an error if file is the wrong format' do
     file_path = 'spec/support/incorrect_data.log'
 
-    expect { described_class.new(file_path).call }.to raise_error(PageMetrics::WrongFormatError)
+    expect { described_class.new(file_path).call }.to raise_error(MetricsLogParser::WrongFormatError)
+  end
+
+  it 'raises as error if the file does not exist' do
+    file_path = 'does_not_exists'
+
+    expect { described_class.new(file_path).call }.to raise_error('Log file not found')
   end
 end

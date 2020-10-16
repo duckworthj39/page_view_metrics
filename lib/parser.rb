@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'page_metrics'
+require_relative 'metrics_log_parser'
 require_relative '../lib/presenters/base_presenter'
 require_relative '../lib/presenters/basic_presenter'
 require_relative '../lib/presenters/colourized_table_presenter'
@@ -8,16 +8,16 @@ require_relative '../lib/presenters/colourized_table_presenter'
 PERMITTED_FORMATS = %w[basic colourized_table].freeze
 PERMITTED_FILTERS = %w[visits unique_visits].freeze
 class Parser
-  def initialize(page_metrics: PageMetrics, output: $stdout)
+  def initialize(metrics_log_parser: MetricsLogParser, output: $stdout)
     @loader = loader
-    @page_metrics = page_metrics
+    @metrics_log_parser = metrics_log_parser
     @output = output
   end
 
   # Filters can be passed as a string  "visits unique_visits"
   # and will be converted to an array to be used for filtering
   def parse_file(file_path = 'webserver.log', format = 'basic', filters = nil)
-    metrics = page_metrics.new(file_path).call
+    metrics = metrics_log_parser.new(file_path).call
 
     presenter = presenter_class(validate_format(format))
     output.puts presenter.new(metrics, filters: validate_filters(filters)).call
@@ -25,7 +25,7 @@ class Parser
 
   private
 
-  attr_reader :loader, :page_metrics, :presenter, :output
+  attr_reader :loader, :metrics_log_parser, :presenter, :output
 
   def presenter_class(presenter_string)
     Object.const_get(

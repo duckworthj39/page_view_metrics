@@ -2,12 +2,12 @@
 
 require_relative 'metric'
 
-# PageMetrics provides a method for returning an Array of Metrics which can be used to display the metrics
-class PageMetrics
+# MetricsLogParser provides a method for returning an Array of Metrics which can be used to display the metrics
+class MetricsLogParser
   class WrongFormatError < StandardError; end
 
   def initialize(file_path)
-    @file_path = file_path
+    @file_path = validate_file_path(file_path)
   end
 
   def call
@@ -36,6 +36,8 @@ class PageMetrics
 
   def validate_file_path(file_path)
     raise 'Log file not found' unless File.exist?(file_path)
+
+    file_path
   end
 
   def create_metric(log_path, log_user)

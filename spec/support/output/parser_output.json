@@ -2,5 +2,6 @@
   "metrics_output": "\nVisits \n---------- \ntest/log/path/2 3 visits\ntest/log/path/3 2 visits\ntest/log/path 1 visit\n\nUnique Visits \n---------- \ntest/log/path/3 1 unique visit\ntest/log/path/2 1 unique visit\ntest/log/path 1 unique visit\n",
   "visits_basic_output": "\nVisits \n---------- \ntest/log/path/2 3 visits\ntest/log/path/3 2 visits\ntest/log/path 1 visit\n",
   "unique_visits_basic_output": "\nUnique Visits \n---------- \ntest/log/path/3 1 unique visit\ntest/log/path/2 1 unique visit\ntest/log/path 1 unique visit\n",
-  "colourized_table": "\"test/log/path/2     \\e[0;94;49m3 visits\\e[0m     \\e[0;92;49m1 unique visit\\e[0m\\ntest/log/path/3     \\e[0;94;49m2 visits\\e[0m     \\e[0;92;49m1 unique visit\\e[0m\\ntest/log/path     \\e[0;94;49m1 visit\\e[0m     \\e[0;92;49m1 unique visit\\e[0m\\n\""
+  "colourized_table": "\"test/log/path/2     \\e[0;94;49m3 visits\\e[0m     \\e[0;92;49m1 unique visit\\e[0m\\ntest/log/path/3     \\e[0;94;49m2 visits\\e[0m     \\e[0;92;49m1 unique visit\\e[0m\\ntest/log/path     \\e[0;94;49m1 visit\\e[0m     \\e[0;92;49m1 unique visit\\e[0m\\n\"",
+  "challenge_fixture": "\nVisits \n---------- \n/about/2 90 visits\n/contact 89 visits\n/index 82 visits\n/about 81 visits\n/help_page/1 80 visits\n/home 78 visits\n\nUnique Visits \n---------- \n/index 23 unique visits\n/home 23 unique visits\n/contact 23 unique visits\n/help_page/1 23 unique visits\n/about/2 22 unique visits\n/about 21 unique visits\n"
 }
