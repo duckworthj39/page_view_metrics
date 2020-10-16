@@ -6,9 +6,12 @@ An app that displays metrics such as visits or unique visits for a set of web pa
 * Install ruby 2.7.2
 * Install bundler
 * Install Make - if you can't please use the Makefile targets as a reference
+
+# Build and Run
 * Run `make build` - this will make the run.rb executable and run bundle install
 * Run `make run-parser` - This will run the parser with the default log file location
 * If you would like to run it manually with another file path you can also use the command `./bin/parser.rb "[file path here]"`
+* You can run the tests by running the command `make test-documentation`
 
 # Permitted Arguments
 1. `file_path` - A valid file path e.g. `'webserver.log'`
