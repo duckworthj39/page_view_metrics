@@ -9,7 +9,7 @@ RSpec.describe BasicPresenter do
 
   context 'without filter' do
     it 'returns a presentable string' do
-      basic_presenter = described_class.new([metrics_double]).call
+      basic_presenter = described_class.new([metrics_double], filters: standard_filter).call
 
       expected_output = <<~OUTPUT
         \nVisits 
@@ -24,7 +24,7 @@ RSpec.describe BasicPresenter do
     end
 
     it 'returns a presentable string with multiple paths' do
-      basic_presenter = described_class.new([metrics_double, metrics_double2]).call
+      basic_presenter = described_class.new([metrics_double, metrics_double2], filters: standard_filter).call
 
       expected_output = <<~OUTPUT
         \nVisits 

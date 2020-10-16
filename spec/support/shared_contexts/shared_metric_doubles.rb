@@ -22,4 +22,6 @@ RSpec.shared_context 'shared metric doubles', shared_context: :metadata do
       unique_visits_to_s: '3 unique visits'
     )
   end
+
+  let(:standard_filter) { %i[visits unique_visits] }
 end

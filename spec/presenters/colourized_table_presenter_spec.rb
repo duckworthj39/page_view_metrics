@@ -12,7 +12,7 @@ RSpec.describe ColourizedTablePresenter do
 
   context 'without filter' do
     it 'returns a presentable for a single row' do
-      colourful_output = described_class.new([metrics_double]).call
+      colourful_output = described_class.new([metrics_double], filters: standard_filter).call
 
       expected_output = <<~OUTPUT
         test/path     \e[0;94;49m1 visit\e[0m     \e[0;92;49m1 unique visit\e[0m
@@ -21,7 +21,7 @@ RSpec.describe ColourizedTablePresenter do
     end
 
     it 'returns a presentable for multiple rows' do
-      colourful_output = described_class.new([metrics_double, metrics_double2]).call
+      colourful_output = described_class.new([metrics_double, metrics_double2], filters: standard_filter).call
 
       expected_output = <<~OUTPUT
         test/path/2     \e[0;94;49m2 visits\e[0m     \e[0;92;49m3 unique visits\e[0m
