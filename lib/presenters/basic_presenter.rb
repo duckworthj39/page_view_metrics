@@ -2,6 +2,7 @@
 
 require_relative '../../lib/presenters/base_presenter'
 
+# Provides a basic way of presenting the metrics in the terminal
 class BasicPresenter < BasePresenter
   def call
     output = ''

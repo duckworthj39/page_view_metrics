@@ -6,12 +6,5 @@ AllCops:
     - 'spec/rails_helper\.rb'
     - 'spec/spec_helper\.rb'
 
-Documentation:
-  Enabled: false
-
-# skips style of child classes and modules.
-Style/ClassAndModuleChildren:
-  Enabled: false
-
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context', 'shared_examples']

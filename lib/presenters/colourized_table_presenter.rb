@@ -3,6 +3,7 @@
 require_relative '../../lib/presenters/base_presenter'
 require 'colorize'
 
+# Provides a colourful side by side method of displaying the metrics in a terminal
 class ColourizedTablePresenter < BasePresenter
   VISITS_HEADER = 'Visits'
   UNIQUE_VISITS_HEADER = 'Unique Visits'

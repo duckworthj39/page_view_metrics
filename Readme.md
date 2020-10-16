@@ -1,14 +1,19 @@
 # page_view_metrics
 
-An app that displays metrics for a page based off a specific log structure
+An app that displays metrics such as visits or unique visits for a set of web page logs
 
 # Prerequisites
-* Install bundler 2.0 or higher
-* Install Make - if you can't please run the commands provided in the Makefile
 * Install ruby 2.7.2
+* Install bundler
+* Install Make - if you can't please use the Makefile targets as a reference
 * Run `make build` - this will make the run.rb executable and run bundle install
 * Run `make run-parser` - This will run the parser with the default log file location
 * If you would like to run it manually with another file path you can also use the command `./bin/parser.rb "[file path here]"`
+
+# Permitted Arguments
+1. `file_path` - A valid file path e.g. `'webserver.log'`
+2. `format` - A presenter e.g. 'basic' or `'colourized_table'`
+3. `filter` - A list of metric attributes to filter with e.g. `'visits'` or `'unique_visits visits'`
 
 # Initial Approach 
 
@@ -38,11 +43,21 @@ page has and append the value to a presentable string.
 
 # Final outcome
 It became clear that in order to provide the functionality I initially wanted, which was to make the presentation
-extendable a needed to remove use inheritence. This was adding a new way of presenting the results just required
-adding a child class to the **BasePresenter**, allowing the parser to take a new format and it should be good to go
-(of course all this while driving it through tests).
+extendable I needed to use inheritence for the presenter. Adding a new way of presenting the results just requires
+adding a child class to the **BasePresenter**. The **Parser** can now take a new format in the parse_file arguments.
+
+# Potential future usage
+If this were to be used in a real life application, my idea would be to drive out a logging standard inside this app
+and use it as a rails engine. One Engine can then handle the generating of logs and parsing, it can then also be ported to
+multiple rails projects. The engine would contain parent controllers that can be inherited from to generate the view logs file
+once the file is saved the parser can handle outputting a string to a terminal or a web page. A quick google search shows
+gems such as this: 
+* https://github.com/tj/terminal-table
+
+Which can be used for displaying the data in a table.
 
 # Tests
+The app was built using TDD, I always make sure to drive development this way.
 The tests can be run by running `make test-documentation`
 ```...........................
    

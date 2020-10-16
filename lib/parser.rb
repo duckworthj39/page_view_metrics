@@ -8,6 +8,7 @@ require_relative '../lib/presenters/colourized_table_presenter'
 PERMITTED_FORMATS = %w[basic colourized_table].freeze
 PERMITTED_FILTERS = %w[visits unique_visits].freeze
 
+# Parser parses a log file and outputs metrics to the terminal
 class Parser
   class InvalidPresenterFormat < StandardError; end
 

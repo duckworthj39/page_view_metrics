@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model object for storing the line of a log, provides methods for displaying as a string
 class Metric
   attr_reader :address, :users
 
