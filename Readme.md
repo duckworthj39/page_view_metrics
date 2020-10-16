@@ -28,37 +28,38 @@ It's become clear that collecting the metrics at the same time and preparing the
 and it means when it comes to displaying the data all of it will be within one array of page objects
 
 # Mid Development
-As the processing of this data is so trivial it looks like the Metric class can handle processing the metrics itself. 
+As the processing of this data is so trivial it looks like the **Metric** class can handle processing the metrics itself. 
 That means I can provide a mechanism for supplying both the to total views and unique views very simply. Also instead of 
-using an array of objects I have found it much more readable for the MetricLogParser class to build a hash of objects.
+using an array of objects I have found it much more readable for the **MetricLogParser** class to build a hash of objects.
 
 Something I hadn't taken into account was the performance of using an array instead of a hash. Finding a value in an array
 means iterating from the first element until the value is found. To improve this the **MetricLogParser** class now uses a hash
-to store the Metric object so they can be looked up in a more performant way.
+to store the Metric object so they can be looked up in a more performant way. It is then converted to an array.
 
 # First Iteration
 This initial iteration includes two sections, one to create a data set for the page metrics and one for displaying the data set.
-The string manipulation to display this data set is all done within the MetricsPresenter, this will take any attribute a
+The string manipulation to display this data set is all done within the **MetricsPresenter**, this will take any attribute a
 page has and append the value to a presentable string. 
 
 # Final outcome
 It became clear that in order to provide the functionality I initially wanted, which was to make the presentation
 extendable I needed to use inheritence for the presenter. Adding a new way of presenting the results just requires
 adding a child class to the **BasePresenter**. The **Parser** can now take a new format in the parse_file arguments.
+This meant removing the **MetricPresenter**.
 
 # Potential future usage
 If this were to be used in a real life application, my idea would be to drive out a logging standard inside this app
 and use it as a rails engine. One Engine can then handle the generating of logs and parsing, it can then also be ported to
-multiple rails projects. The engine would contain parent controllers that can be inherited from to generate the view logs file
+multiple rails projects. The engine would contain parent controllers that can be inherited from to generate the view logs file,
 once the file is saved the parser can handle outputting a string to a terminal or a web page. A quick google search shows
 gems such as this: 
 * https://github.com/tj/terminal-table
 
-Which can be used for displaying the data in a table.
+Which can be used for displaying the data in a table inside the terminal. This could be a potential third presenter.
 
 # Tests
 The app was built using TDD, I always make sure to drive development this way.
-The tests can be run by running `make test-documentation`
+You can run the tests by running the command `make test-documentation`
 ```...........................
    
    Finished in 0.01144 seconds (files took 0.31095 seconds to load)
