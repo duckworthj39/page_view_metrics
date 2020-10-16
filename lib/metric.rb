@@ -27,8 +27,4 @@ class Metric
   def unique_visits_to_s
     "#{unique_visits} unique visit#{unique_visits > 1 ? 's' : ''}"
   end
-
-  def table_row_to_s
-    "#{address} #{visits} visit#{visits > 1 ? 's' : ''} and #{unique_visits} unique visit#{unique_visits > 1 ? 's' : ''}"
-  end
 end

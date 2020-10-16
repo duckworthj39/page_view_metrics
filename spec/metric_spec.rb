@@ -3,7 +3,7 @@
 require 'metric'
 
 RSpec.describe Metric do
-  subject { Metric.new('test/path/1') }
+  subject { described_class.new('test/path/1') }
 
   context 'with a single user' do
     it 'returns unique views' do
@@ -65,17 +65,6 @@ RSpec.describe Metric do
       output = subject.unique_visits_to_s
 
       expect(output).to eq('2 unique visits')
-    end
-  end
-
-  xcontext 'table row' do
-    it 'displays a coloured table rows' do
-      subject.add_user('000.000.000.000')
-      subject.add_user('000.000.000.001')
-
-      output = subject.table_row_to_s
-
-      expect(output).to eq('test/path/1 2 visits and 2 unique visits')
     end
   end
 end
