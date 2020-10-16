@@ -77,7 +77,6 @@ RSpec.describe Parser do
           expect(arg).to eq(expected_output)
         end
       end
-
     end
   end
 end
