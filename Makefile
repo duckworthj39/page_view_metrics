@@ -8,7 +8,7 @@ run-parser:
 run-parser-visits-filter:
 	./bin/run.rb "webserver.log" "basic" "visits"
 
-run-parser-table:
+run-parser-colourful:
 	./bin/run.rb "webserver.log" "colourized_table"
 
 test-documentation:

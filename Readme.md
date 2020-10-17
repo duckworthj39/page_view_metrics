@@ -18,19 +18,38 @@ An app that displays metrics such as visits or unique visits for a set of web pa
 2. `format` - A presenter e.g. 'basic' or `'colourized_table'`
 3. `filter` - A list of metric attributes to filter with e.g. `'visits'` or `'unique_visits visits'`
 
-# Initial Approach 
+# Tests
+The app was built using TDD, I always make sure to drive development this way.
+You can run the tests by running the command `make test-documentation`
+```...........................
+   
+   Finished in 0.01144 seconds (files took 0.31095 seconds to load)
+   27 examples, 0 failures
+   
+   Coverage report generated for RSpec to /Users/jasonduckworth/Gitlab/page_view_metrics/coverage. 114 / 114 LOC (100.0%) covered.
+```
+
+# Rubocop
+```Inspecting 14 files
+ ..............
+ 
+ 14 files inspected, no offenses detected
+```
+
+# Approach 
+### Initial Approach 
 
 Initially I want to provide an MVP (minimal viable product) as to not overcomplicated a very simple problem. 
 The intention is to provide something that can be built extended and display prettier metrics for a user.
 
 The presentation will be separate from the parsing code.
 
-My original idea was to split the unique and most views processing into different classes, however my current approach
+My original idea was to split the unique visits and visits processing into different classes, however my current approach
 means the list of metrics objects will have to be accessed and updated separately based on which process is carried out first.
 It's become clear that collecting the metrics at the same time and preparing the data together will solve this issue, 
 and it means when it comes to displaying the data all of it will be within one array of page objects
 
-# Mid Development
+### Mid Development
 As the processing of this data is so trivial it looks like the **Metric** class can handle processing the metrics itself. 
 That means I can provide a mechanism for supplying both the to total views and unique views very simply. Also instead of 
 using an array of objects I have found it much more readable for the **MetricLogParser** class to build a hash of objects.
@@ -39,12 +58,16 @@ Something I hadn't taken into account was the performance of using an array inst
 means iterating from the first element until the value is found. To improve this the **MetricLogParser** class now uses a hash
 to store the Metric object so they can be looked up in a more performant way. It is then converted to an array.
 
-# First Iteration
+Initially I was loading the whole log file straight into an array, then iterating over that in a the MetricLogParser class. This 
+seemed an inefficient way of reading the file and processing it so I moved this all into the **MetricLogParser**.
+The **MetricLogParser** reads the file line by line, which means we aren't loading the whole file straight into memory.
+
+### First Iteration
 This initial iteration includes two sections, one to create a data set for the page metrics and one for displaying the data set.
 The string manipulation to display this data set is all done within the **MetricsPresenter**, this will take any attribute a
 page has and append the value to a presentable string. 
 
-# Final outcome
+### Final outcome
 It became clear that in order to provide the functionality I initially wanted, which was to make the presentation
 extendable I needed to use inheritence for the presenter. Adding a new way of presenting the results just requires
 adding a child class to the **BasePresenter**. The **Parser** can now take a new format in the parse_file arguments.
@@ -59,24 +82,6 @@ gems such as this:
 * https://github.com/tj/terminal-table
 
 Which can be used for displaying the data in a table inside the terminal. This could be a potential third presenter.
-
-# Tests
-The app was built using TDD, I always make sure to drive development this way.
-You can run the tests by running the command `make test-documentation`
-```...........................
-   
-   Finished in 0.01144 seconds (files took 0.31095 seconds to load)
-   27 examples, 0 failures
-   
-   Coverage report generated for RSpec to /Users/jasonduckworth/Gitlab/page_view_metrics/coverage. 114 / 114 LOC (100.0%) covered.
-```
-
-# Rubocop output
-```Inspecting 14 files
- ..............
- 
- 14 files inspected, no offenses detected
-```
 
 # References
 https://launchschool.com/blog/how-the-hash-works-in-ruby
