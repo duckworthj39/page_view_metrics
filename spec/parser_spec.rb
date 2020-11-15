@@ -29,6 +29,18 @@ RSpec.describe Parser do
       end.to raise_error('invalid_format presenter not found')
     end
 
+    it 'raises error if filter not valid' do
+      metrics_log_parser = spy
+      output = spy
+
+      parser = described_class.new(metrics_log_parser: metrics_log_parser, output: output)
+
+      expect do
+        parser.parse_file(integration_test_log_path, 'basic', 'invalid_filter')
+      end.to raise_error('Invalid Filter')
+
+    end
+
     it 'raises error if we fail to get the presenter constant' do
       metrics_log_parser = spy
       output = spy
