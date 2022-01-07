@@ -28,7 +28,7 @@ class MetricsLogParser
   attr_reader :file_path
 
   def valid_logs(line)
-    log_path, log_user = line.split(' ')
+    log_path, log_user = line.split
     raise WrongFormatError, "#{file_path} file cannot be parsed" if log_path.nil? || log_user.nil?
 
     [log_path, log_user]

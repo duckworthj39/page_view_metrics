@@ -26,7 +26,7 @@ class ColourizedTablePresenter < BasePresenter
     filters.map do |filter|
       colour = alternate_colour(colour)
       "     #{metric.public_send("#{filter.to_sym}_to_s").colorize(colour)}"
-    end.join('')
+    end.join
   end
 
   def alternate_colour(colour)

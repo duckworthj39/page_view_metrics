@@ -43,7 +43,7 @@ class Parser
   def valid_filters(filters)
     return if filters.nil?
 
-    filter_array = filters.split(' ')
+    filter_array = filters.split
     raise 'Invalid Filter' unless filter_array.all? { |filter| PERMITTED_FILTERS.include?(filter) }
 
     filter_array

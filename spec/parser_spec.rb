@@ -38,7 +38,6 @@ RSpec.describe Parser do
       expect do
         parser.parse_file(integration_test_log_path, 'basic', 'invalid_filter')
       end.to raise_error('Invalid Filter')
-
     end
 
     it 'raises error if we fail to get the presenter constant' do

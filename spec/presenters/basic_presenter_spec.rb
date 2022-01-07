@@ -12,12 +12,12 @@ RSpec.describe BasicPresenter do
       basic_presenter = described_class.new([metrics_double], filters: standard_filter).call
 
       expected_output = <<~OUTPUT
-        \nVisits 
-        ---------- 
+        \nVisits#{' '}
+        ----------#{' '}
         test/path 1 visit
 
-        Unique Visits 
-        ---------- 
+        Unique Visits#{' '}
+        ----------#{' '}
         test/path 1 unique visit
       OUTPUT
       expect(basic_presenter).to eq(expected_output)
@@ -27,13 +27,13 @@ RSpec.describe BasicPresenter do
       basic_presenter = described_class.new([metrics_double, metrics_double2], filters: standard_filter).call
 
       expected_output = <<~OUTPUT
-        \nVisits 
-        ---------- 
+        \nVisits#{' '}
+        ----------#{' '}
         test/path/2 2 visits
         test/path 1 visit
 
-        Unique Visits 
-        ---------- 
+        Unique Visits#{' '}
+        ----------#{' '}
         test/path/2 3 unique visits
         test/path 1 unique visit
       OUTPUT
@@ -48,8 +48,8 @@ RSpec.describe BasicPresenter do
 
       expected_output = <<~OUTPUT
 
-        Visits 
-        ---------- 
+        Visits#{' '}
+        ----------#{' '}
         test/path 1 visit
       OUTPUT
       expect(basic_presenter).to eq(expected_output)
@@ -59,8 +59,8 @@ RSpec.describe BasicPresenter do
       basic_presenter = described_class.new([metrics_double], filters: [:unique_visits]).call
 
       expected_output = <<~OUTPUT
-        \nUnique Visits 
-        ---------- 
+        \nUnique Visits#{' '}
+        ----------#{' '}
         test/path 1 unique visit
       OUTPUT
 
@@ -71,8 +71,8 @@ RSpec.describe BasicPresenter do
       basic_presenter = described_class.new([metrics_double, metrics_double2], filters: [:visits]).call
 
       expected_output = <<~OUTPUT
-        \nVisits 
-        ---------- 
+        \nVisits#{' '}
+        ----------#{' '}
         test/path/2 2 visits
         test/path 1 visit
       OUTPUT
@@ -84,8 +84,8 @@ RSpec.describe BasicPresenter do
       basic_presenter = described_class.new([metrics_double, metrics_double2], filters: [:unique_visits]).call
 
       expected_output = <<~OUTPUT
-        \nUnique Visits 
-        ---------- 
+        \nUnique Visits#{' '}
+        ----------#{' '}
         test/path/2 3 unique visits
         test/path 1 unique visit
       OUTPUT
