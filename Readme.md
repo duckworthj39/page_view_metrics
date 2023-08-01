@@ -84,6 +84,7 @@ gems such as this:
 Which can be used for displaying the data in a table inside the terminal. This could be a potential third presenter.
 
 # References
+
 https://launchschool.com/blog/how-the-hash-works-in-ruby
 
 https://github.com/simplecov-ruby/simplecov
